@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doğrulama Kodu Gönder</title>
+<style>
+    :root {
+        --main-color: #00174A;
+        --light-bg: #f4f6fc;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: var(--light-bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    h2 {
+        color: var(--main-color);
+        margin-bottom: 20px;
+    }
+    label {
+        font-size: 14px;
+        font-weight: bold;
+        color: var(--main-color);
+        display: block;
+        margin-bottom: 8px;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+    input:focus {
+        border-color: var(--main-color);
+        outline: none;
+    }
+    button {
+        width: 100%;
+        background: var(--main-color);
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: #003088;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Doğrulama Kodu Gönder</h2>
+    <form action="kod_gonder.php" method="POST">
+        <label for="email">E-posta Adresiniz</label>
+        <input type="email" id="email" name="email" placeholder="ornek@mail.com" required>
+        <button type="submit">Kodu Gönder</button>
+    </form>
+</div>
+</body>
+</html>
