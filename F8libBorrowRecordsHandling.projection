@@ -1,0 +1,94 @@
+projection F8libBorrowRecordsHandling;
+component F8LIB;
+layer Core;
+description "Put some useful description here ...";
+category Users;
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+
+entityset F8libBorrowRecordsSet for F8libBorrowRecords;
+entityset F8libBooksSet for F8libBooks;
+
+------------------------------ ENTITY DETAILS -------------------------------
+
+@Override
+entity F8libBorrowRecords {
+   crud = Read;
+   reference AuthorIdRef(AuthorId) to F8libAuthors(AuthorId);
+   reference BookIdRef(BookId) to F8libBooks(BookId);
+   reference UserIdRef(UserId) to F8libUsers(UserId);
+   --reference BookIdRef(BookId) to F8libBooks(BookId);
+   attribute AuthorId Number {
+      fetch = "F8lib_Books_API.Get_Author_Id(Book_Id)";
+   }
+   attribute AuthorName Text {
+      fetch = "F8lib_Authors_API.Get_Author_Name(F8lib_Books_API.Get_Author_Id(Book_Id))";
+
+   }
+   attribute BookName Text {
+      fetch = "F8lib_Books_API.Get_Book_Name(Book_Id)";
+
+   }
+   attribute BookNameRef Text {
+      fetch = "F8lib_Books_API.Get_Book_Name(Book_Id)";
+
+   }
+   --array F8libBookArray(BookId) to F8libBooks(BookId);
+
+}
+@Override
+entity F8libBooks {
+   crud = Update;
+   from = "F8LIB_BOOK_QRY";
+   attribute UserId Number;
+
+   reference UserIdRef(UserId) to F8libUsers(UserId);
+   --reference BookIdRef(BookId) to F8libBooks(BookId);
+   attribute BookId Number;
+   attribute BookName Text;
+   attribute AuthorId Number {
+      fetch = "F8lib_Books_API.Get_Author_Id(Book_Id)";
+   }
+   attribute AuthorName Text {
+      fetch = "F8lib_Authors_API.Get_Author_Name(F8lib_Books_API.Get_Author_Id(Book_Id))";
+
+   }
+}
+
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+
+
+---------------------------------- ACTIONS ----------------------------------
+
+
+action Refresh {
+   initialcheck none;
+   ludependencies = F8libBooks, F8libBorrowRecords;
+   parameter BookId Number;
+
+}
+action ReturnBook {
+   initialcheck none;
+   ludependencies = F8libBooks, F8libBorrowRecords;
+   parameter BookId Number;
+
+}
+--------------------------------- FUNCTIONS ---------------------------------
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

@@ -1,0 +1,40 @@
+projection F8libBookReviewsHandling;
+component F8LIB;
+layer Core;
+description "Put some useful description here ...";
+category Users;
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+
+entityset F8libBookReviewsSet for F8libBookReviews;
+------------------------------ ENTITY DETAILS -------------------------------
+@Override
+entity F8libBookReviews {
+   reference UserIdRef(UserId) to F8libUsers(UserId);
+   reference BookIdRef(BookId) to F8libBooks(BookId);
+}
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+
+
+---------------------------------- ACTIONS ----------------------------------
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

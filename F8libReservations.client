@@ -1,0 +1,111 @@
+client F8libReservations;
+component F8LIB;
+layer Core;
+projection F8libReservationsHandling;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry FlibReservationsEntry parent F8libNavigator.F8libSideData at index 70 {
+      label = "Reservations";
+      page List;
+   }
+}
+-------------------------------- MAIN PAGES ---------------------------------
+page List using F8libReservationsSet {
+   label = "Reservations";
+   list ReservationsList;
+}
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+selector UsersLovSelector for F8libUsers {
+   static UserId;
+   static  Name;
+}
+selector BookNameSelector for F8libBookReservationLov {
+   static BookName;
+   static  AuthorId;
+   static AuthorName;
+
+}
+selector AuthorsLovSelector for F8libAuthors {
+   static AuthorId;
+   static  AuthorName;
+}
+---------------------------------- GROUPS -----------------------------------
+
+
+----------------------------------- LISTS -----------------------------------
+list ReservationsList for F8libReservations {
+   lov   UserIdRef with UsersLovSelector {
+      searchable = true;
+      description = UserIdRef.Name;
+   }
+
+   static ReservationId;
+
+   lov BookNameRef with BookNameSelector {
+      label = "BookName";
+
+      validate command {
+         execute {
+
+            set AuthorId = BookNameRef.AuthorId;
+         }
+      }
+   }
+
+   lov AuthorIdRef with AuthorsLovSelector {
+      searchable = true;
+      description = AuthorIdRef.AuthorName;
+      editable = [false];
+
+   }
+
+   static RequestDate;
+   static   Objstate;
+   static NotificationDate;
+   commandgroup ReservationStatueGroup {
+      visible = [true];
+      commandgroup SupReservationStatueGroup {
+         visible = [true];
+         label = "Status";
+
+         command Cancel;
+         command Complete;
+
+      }
+   }
+}
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

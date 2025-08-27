@@ -1,0 +1,102 @@
+client F8libBooks;
+component F8LIB;
+layer Core;
+projection F8libBooksHandling;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry FlibBooksEntry parent F8libNavigator.F8libSideData at index 20 {
+      label = "Books";
+      page List;
+   }
+}
+-------------------------------- MAIN PAGES ---------------------------------
+page List using F8libBooksSet {
+   label = "Books";
+   list BooksList;
+
+
+}
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+selector CategoriesLovSelector for F8libCategories {
+   static CategoryId;
+   static Description;
+}
+
+selector AuthorsLovSelector for F8libAuthors {
+   static AuthorId;
+   static AuthorName;
+}
+
+---------------------------------- GROUPS -----------------------------------
+
+
+----------------------------------- LISTS -----------------------------------
+list BooksList for F8libBooks {
+   static BookId;
+   field  BookName;
+   --field  AuthorId;
+   lov   AuthorIdRef with AuthorsLovSelector {
+      searchable = true;
+      description = AuthorIdRef.AuthorName;
+   }
+   field  Publisher;
+   field  Isbn;
+   field  PublishYear;
+   lov   CategoryIdRef with CategoriesLovSelector {
+      searchable = true;
+      description = CategoryIdRef.Description;
+
+
+   }
+   field   BookImage;
+   field   BookSummary;
+   field   PageCount;
+   static   Objstate;
+   static  AddedDate;
+   commandgroup BookStatueGroup {
+      visible = [true];
+      commandgroup SupBookStatueGroup {
+         visible = [true];
+         label = "Status";
+         command Delete;
+         command Return;
+         command Borrow;
+
+      }
+   }
+}
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

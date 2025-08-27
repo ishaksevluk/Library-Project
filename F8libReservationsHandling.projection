@@ -1,0 +1,53 @@
+projection F8libReservationsHandling;
+component F8LIB;
+layer Core;
+description "Put some useful description here ...";
+category Users;
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- MAIN ENTRY POINTS -----------------------------
+entityset F8libReservationsSet for F8libReservations;
+
+------------------------------ ENTITY DETAILS -------------------------------
+@Override
+entity F8libReservations {
+   reference UserIdRef(UserId) to F8libUsers(UserId);
+   reference BookNameRef(BookName) to F8libBookReservationLov(BookName);
+   reference AuthorIdRef(AuthorId) to F8libAuthors(AuthorId);
+}
+
+
+------------------------------- ENUMERATIONS --------------------------------
+
+
+---------------------------------- QUERIES ----------------------------------
+query F8libBookReservationLov {
+   from = "F8LIB_BOOK_RESERVATION";
+   keys = BookName;
+   ludependencies = F8libReservations;
+   attribute BookName Text;
+   attribute AuthorId Number;
+   attribute AuthorName Text;
+
+
+
+}
+
+
+---------------------------------- ACTIONS ----------------------------------
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+
+-------------------------------- STRUCTURES ---------------------------------
+
+
+--------------------------------- VIRTUALS ----------------------------------
+
+
+--------------------------------- SUMMARIES ---------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------

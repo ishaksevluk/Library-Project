@@ -1,0 +1,33 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libBookReviews
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+VIEW F8LIB_BOOK_REVIEWS_V IS
+SELECT 
+    r.book_reviews_id,
+    r.book_id,
+    r.review_comment,
+    r.user_id,
+    u.name
+FROM f8lib_book_reviews r
+JOIN f8lib_users u ON r.user_id = u.user_id
+WITH READ ONLY;
+
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+

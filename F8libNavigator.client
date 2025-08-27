@@ -1,0 +1,123 @@
+client F8libNavigator;
+component F8LIB;
+layer Core;
+projection F8libNavigator;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry F8libTopNode toplevel at index 10 {
+      label = "F8 Library";
+   }
+}
+navigator {
+   entry F8libBasicData  parent F8libNavigator.F8libTopNode at index 10 {
+      label = "Basic Data";
+   }
+}
+
+navigator {
+   entry F8libSideData  parent F8libNavigator.F8libTopNode at index 20 {
+      label = "Side Data";
+   }
+}
+navigator {
+   entry F8libUsers parent F8libNavigator.F8libTopNode at index 10 {
+      label = "Users";
+   }
+}
+navigator {
+   entry F8libCategories parent F8libNavigator.F8libTopNode at index 20 {
+      label = "Categories";
+   }
+}
+navigator {
+   entry F8libAuthors parent F8libNavigator.F8libTopNode at index 30 {
+      label = "Authors";
+
+   }
+}
+
+navigator {
+   entry F8libFavorites parent F8libNavigator.F8libTopNode at index 10 {
+      label = "Favorites";
+   }
+}
+navigator {
+   entry F8libBooks parent F8libNavigator.F8libTopNode at index 20 {
+      label = "Books";
+
+   }
+
+}
+navigator {
+   entry F8libBookFollowings parent F8libNavigator.F8libTopNode at index 30 {
+      label = "BookFollowings";
+   }
+}
+navigator {
+   entry F8libPasswordResets parent F8libNavigator.F8libTopNode at index 40 {
+      label = "PasswordResets";
+   }
+}
+navigator {
+   entry F8libBookRewievs parent F8libNavigator.F8libTopNode at index 50 {
+      label = "BookRewievs";
+   }
+}
+
+navigator {
+   entry F8libBorrowRecords parent F8libNavigator.F8libTopNode at index 60 {
+      label = "BorrowRecords";
+   }
+}
+
+navigator {
+   entry F8libReservations parent F8libNavigator.F8libTopNode at index 70 {
+      label = "Reservations";
+   }
+}
+
+
+-------------------------------- MAIN PAGES ---------------------------------
+
+
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+
+---------------------------------- GROUPS -----------------------------------
+
+
+----------------------------------- LISTS -----------------------------------
+
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

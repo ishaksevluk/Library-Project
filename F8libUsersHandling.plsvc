@@ -1,0 +1,22 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libUsersHandling
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+@Override
+PROCEDURE CRUD_Default___ (
+   rec_ IN OUT F8lib_Users_Rec )
+IS
+BEGIN
+   --(+)20250725 eren(basla)
+   rec_.user_id:=0;
+   --(+)20250725 eren(bitir)
+   super(rec_);
+END CRUD_Default___;

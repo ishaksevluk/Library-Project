@@ -1,0 +1,109 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libBorrowRecordsHandling
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+---@Override
+--PROCEDURE CRUD_Default___ (
+   --rec_ IN OUT F8lib_Borrow_Records_Rec )
+---IS
+--BEGIN
+   --(+)20250725 ishak(basla)
+  -- rec_.borrow_record_id:=0;
+   --(+)20250725 ishak(bitir)
+--   super(rec_);
+--END CRUD_Default___;
+
+
+@Override
+PROCEDURE CRUD_Update___ (
+   etag_   IN OUT VARCHAR2,
+   key_    IN OUT F8lib_Books_Key,
+   attr_   IN OUT VARCHAR2,
+   info_   OUT VARCHAR2,
+   action_ IN  VARCHAR2 )
+IS
+   my_user_id_ NUMBER;
+   my_attr_ VARCHAR2(3200);
+   my_objid_               VARCHAR2(2000) := Get_Objid_From_Etag___(etag_);
+   my_objversion_          VARCHAR2(2000) := Get_Objversion_From_Etag___(etag_);
+   CURSOR get_book_id IS 
+   SELECT book_id
+   FROM f8lib_books
+   WHERE objid= my_objid_
+   AND objversion= my_objversion_;
+   my_book_id_ NUMBER;
+   
+   my_info_ VARCHAR2(32000);
+BEGIN
+   OPEN get_book_id;
+   FETCH get_book_id INTO my_book_id_;
+   CLOSE get_book_id;
+   super(etag_, key_, attr_, info_, action_);
+   
+   
+   --rec_ := F8lib_Books_API.Get(my_book_id_);
+  
+   my_info_ := NULL;
+   my_objid_ := NULL;
+   my_objversion_ := NULL;
+   my_user_id_ := Client_SYS.Get_Item_Value('USER_ID', attr_);
+   Client_SYS.Clear_Attr(my_attr_);
+   Client_SYS.Add_To_Attr('USER_ID',my_user_id_,my_attr_);
+   Client_SYS.Add_To_Attr('BOOK_ID',my_book_id_,my_attr_);
+   Client_SYS.Add_To_Attr('BORROW_RECORD_ID',0,my_attr_);
+   F8lib_Borrow_Records_API.New__(my_info_, my_objid_, my_objversion_, my_attr_, 'DO');
+END CRUD_Update___;
+
+
+
+
+
+
+
+
+
+PROCEDURE Refresh___ (
+   book_id_ IN NUMBER)
+IS
+   CURSOR get_obj_values IS 
+   SELECT objid,objversion
+   FROM f8lib_books
+   WHERE book_id = book_id_;
+   my_objid_               VARCHAR2(2000);
+   my_objversion_          VARCHAR2(2000);
+   my_info_                VARCHAR2(32000);
+   my_attr_                VARCHAR2(3200);
+BEGIN
+   OPEN get_obj_values;
+   FETCH get_obj_values INTO my_objid_,my_objversion_;
+   CLOSE get_obj_values;
+   F8lib_Books_API.Borrow__(my_info_,my_objid_,my_objversion_,my_attr_,'DO');
+END Refresh___;
+
+
+PROCEDURE Return_Book___ (
+   book_id_ IN NUMBER)
+IS
+   CURSOR get_obj_values IS 
+   SELECT objid,objversion
+   FROM f8lib_books
+   WHERE book_id = book_id_;
+   my_objid_               VARCHAR2(2000);
+   my_objversion_          VARCHAR2(2000);
+   my_info_                VARCHAR2(32000);
+   my_attr_                VARCHAR2(3200);
+BEGIN
+	
+   OPEN get_obj_values;
+   FETCH get_obj_values INTO my_objid_,my_objversion_;
+   CLOSE get_obj_values;
+   F8lib_Books_API.Return__(my_info_,my_objid_,my_objversion_,my_attr_,'DO');
+END Return_Book___;

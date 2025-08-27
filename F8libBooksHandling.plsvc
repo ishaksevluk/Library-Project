@@ -1,0 +1,21 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libBooksHandling
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+layer Core;
+@Override
+PROCEDURE CRUD_Default___ (
+   rec_ IN OUT F8lib_Books_Rec )
+IS
+BEGIN
+   --(+)20250725 gamze(basla)
+   rec_.book_id:=0;
+   --(+)20250725 gamze(bitir)
+   super(rec_);
+END CRUD_Default_;

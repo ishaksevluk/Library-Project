@@ -1,0 +1,69 @@
+-----------------------------------------------------------------------------
+--  Module : F8LIB
+--
+--  File   : F8libcategories.cdb
+--
+--  IFS Developer Studio Template Version 2.6
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+--  250714  ishaksevluk
+-----------------------------------------------------------------------------
+SET SERVEROUTPUT ON
+
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   table_name_ VARCHAR2(30) := 'F8LIB_CATEGORIES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'CATEGORY_ID', 'VARCHAR2(10)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DESCRIPTION', 'VARCHAR2(100)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   index_name_ VARCHAR2(30) := 'F8LIB_CATEGORIES_PK';
+   table_name_ VARCHAR2(30) := 'F8LIB_CATEGORIES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'CATEGORY_ID');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+
+
+-- [IFS COMPLETE BLOCK DECLAREEND]
+DECLARE
+   index_name_ VARCHAR2(30) := 'F8LIB_CATEGORIES_RK';
+   table_name_ VARCHAR2(30) := 'F8LIB_CATEGORIES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+-- [END IFS COMPLETE BLOCK]
+/
+
+
+SET SERVEROUTPUT OFF

@@ -1,0 +1,22 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libAuthorsHandling
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+@Override
+PROCEDURE CRUD_Default___ (
+   rec_ IN OUT F8lib_Authors_Rec )
+IS
+BEGIN
+   --(+)20250725 ishak(basla)
+   rec_.author_id:=0;
+   --(+)20250725 ishak(bitir)
+   super(rec_);
+END CRUD_Default___;

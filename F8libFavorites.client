@@ -1,0 +1,77 @@
+client F8libFavorites;
+component F8LIB;
+layer Core;
+projection F8libFavoritesHandling;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry FlibFavoritesEntry parent F8libNavigator.F8libSideData at index 10 {
+      label = "Favorites";
+      page List;
+   }
+}
+-------------------------------- MAIN PAGES ---------------------------------
+
+page List using F8libFavoritesSet {
+   label = "Favorites";
+   list FavoritesList;
+}
+--------------------------------- COMMANDS ----------------------------------
+
+
+--------------------------------- SELECTORS ---------------------------------
+
+selector UsersLovSelector for F8libUsers {
+   static UserId;
+   static  Name;
+}
+
+selector BooksLovSelector for F8libBooks {
+   static BookId;
+   static BookName;
+}
+---------------------------------- GROUPS -----------------------------------
+
+
+----------------------------------- LISTS -----------------------------------
+
+list FavoritesList for F8libFavorites {
+   lov   UserIdRef with UsersLovSelector {
+      searchable = true;
+      description = UserIdRef.Name;
+   }
+   lov   BookIdRef with BooksLovSelector {
+      searchable = true;
+      description = BookIdRef.BookName;
+   }
+   field IsFavorite;
+   static FavoriteDate;
+}
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------

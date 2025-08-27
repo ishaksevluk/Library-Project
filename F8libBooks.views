@@ -1,0 +1,45 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libBooks
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+VIEW F8LIB_BOOK_RESERVATION IS
+SELECT DISTINCT
+   b.book_name,
+   b.author_id,
+   a.author_name,
+   b.author_id || ' - ' || a.author_name AS author_display
+FROM f8lib_books_tab b
+JOIN f8lib_authors_tab a ON b.author_id = a.author_id;
+
+VIEW F8LIB_BOOK_QRY IS
+SELECT 
+   b.book_id,
+   b.book_name,
+   b.author_id,
+   F8lib_Authors_API.get_Author_Name(author_id) author_name,
+   NULL user_id,
+   objid,
+   objversion,
+   added_date
+FROM f8lib_books b
+WHERE objstate= 'Available';
+
+
+
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+

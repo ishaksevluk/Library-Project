@@ -1,0 +1,22 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: F8libReservationsHandling
+--  Component:    F8LIB
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Core;
+@Override
+PROCEDURE CRUD_Default___ (
+   rec_ IN OUT F8lib_Reservations_Rec )
+IS
+BEGIN
+   --(+)20250725 ishak(basla)
+   rec_.reservation_id:=0;
+   --(+)20250725 ishak(bitir)
+   super(rec_);
+END CRUD_Default___;

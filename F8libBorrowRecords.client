@@ -1,0 +1,142 @@
+client F8libBorrowRecords;
+component F8LIB;
+layer Core;
+projection F8libBorrowRecordsHandling;
+description "Put some useful description here ...";
+
+--------------------------------- FRAGMENTS ---------------------------------
+
+----------------------------- NAVIGATOR ENTRIES -----------------------------
+navigator {
+   entry FlibBorrowRecordsEntry parent F8libNavigator.F8libSideData at index 60 {
+      label = "BorrowRecords";
+      page List;
+   }
+}
+-------------------------------- MAIN PAGES ---------------------------------
+page List {
+   label = "BorrowRecords";
+   --list BorrowRecordsList;
+   tabs {
+      tab {
+         label = "Odunc Alinanlar";
+
+         list BorrowRecordsList using F8libBorrowRecordsSet;
+      }
+
+      tab {
+         label = "Odunc Alinabilirler";
+
+         list AvaibleBookList using F8libBooksSet;
+      }
+   }
+
+}
+--------------------------------- COMMANDS ----------------------------------
+
+command RefreshCommand for F8libBooks {
+   label = "Refresh Command";
+   mode = Global;
+   execute {
+      call Refresh(BookId);
+   }
+}
+command ReturnBookCommand for F8libBorrowRecords {
+   label = "Return Book";
+   mode = Global;
+   execute {
+      call ReturnBook(BookId);
+   }
+}
+--------------------------------- SELECTORS ---------------------------------
+
+selector UsersLovSelector for F8libUsers {
+   static UserId;
+   static  Name;
+}
+
+selector BooksLovSelector for F8libBooks {
+   static BookId;
+
+}
+
+selector AuthorsLovSelector for F8libAuthors {
+   static AuthorId;
+
+}
+---------------------------------- GROUPS -----------------------------------
+
+
+----------------------------------- LISTS -----------------------------------
+list BorrowRecordsList for F8libBorrowRecords {
+   /*lov BookIdRef with BooksLovSelector {
+      searchable = true;
+      description = BookIdRef.BookName;
+   }*/
+
+ 
+
+   lov   UserIdRef with UsersLovSelector {
+      searchable = true;
+      description = UserIdRef.Name;
+   }
+   /*lov   BookIdRef with BooksLovSelector {
+      searchable = true;
+      description = BookIdRef.BookName;
+   }*/
+   static BookId;
+   static AuthorId;
+   static BookName;
+
+   static BorrowRecordId;
+   static BorrowDate;
+   static ReturnDate;
+   command ReturnBookCommand;
+}
+list AvaibleBookList for F8libBooks {
+   crudactions {
+      after command RefreshCommand;
+
+
+   }
+
+   static BookId;
+   /*lov BookIdRef with BooksLovSelector {
+      searchable = true;
+      description = BookIdRef.BookName;
+   }*/
+   static  BookName;
+   static  AuthorName;
+
+   lov   UserIdRef with UsersLovSelector {
+      searchable = true;
+      description = UserIdRef.Name;
+   }
+}
+
+
+---------------------------------- DIALOGS ----------------------------------
+
+
+-------------------------------- SINGLETONS ---------------------------------
+
+
+---------------------------------- CHARTS -----------------------------------
+
+
+--------------------------------- CALENDERS ---------------------------------
+
+
+---------------------------------- SHEETS -----------------------------------
+
+
+----------------------------- STATE INDICATORS ------------------------------
+
+
+----------------------------------- TREES -----------------------------------
+
+
+---------------------------------- PLUGINS ----------------------------------
+
+
+------------------------------- IMAGE VIEWERS -------------------------------
